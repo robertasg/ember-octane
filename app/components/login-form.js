@@ -1,18 +1,16 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-
+import { inject } from '@ember/service';
 
 export default class LoginFormComponent extends Component {
+  @inject auth;
+
   @tracked
   userId = null;
 
   get isDisabled() {
     return !this.userId;
-  }
-
-  loginAsUserWithId(value) {
-    console.log('Login as UserId: ', value);
   }
 
   @action
@@ -21,7 +19,7 @@ export default class LoginFormComponent extends Component {
     const val = target.querySelector('select').value;
     evt.preventDefault();
 
-    this.loginAsUserWithId(val);
+    this.auth.loginWithUserId(val);
   }
 
   @action
