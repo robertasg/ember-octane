@@ -5,9 +5,9 @@
   <!-- Channel Message List -->
   <div class="py-4 flex-1 overflow-y-scroll channel-messages-list" role="list">
     {{#each messages as |message|}}
-      <Message @message={{message}} />
+      <Message @message={{message}} @delete={{ fn channelApi.deleteMessage message.id }} />
     {{/each}}
   </div>
 
-  <ChannelFooter @onSubmit={{channelApi.handleSubmit}} />
+  <ChannelFooter @onSubmit={{channelApi.createMessage}} />
 </ChatContainer>
